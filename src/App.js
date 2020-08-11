@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Message from "./Message";
+import Button from "./Button";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { clickedTimes: 0 };
+  }
+  whenClicked() {
+    this.setState({ clickedTimes: this.state.clickedTimes + 1 });
+    console.log("Click on child button" + this.state.clickedTimes);
+  }
+  render() {
+    return (
+      <div className="App">
+        <p> Hello, World!</p>
+        <Message message={"I am sending a message"} />
+        <Button
+          text="Click me!"
+          whenClicked={this.whenClicked.bind(this)}
+          clickedTimes={this.state.clickedTimes}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
